@@ -1,6 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import MovieSearch from './search';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -8,20 +8,8 @@ const Movie = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(
-          'https://api.themoviedb.org/3/discover/movie',
-          {
-            params: {
-              api_key: 'bca0b27dc3c2608802db6d8d9bf57c06',
-              language: 'en-US',
-              sort_by: 'popularity.desc',
-              include_adult: false,
-              include_video: false,
-              page: 1,
-            },
-          }
-        );
-        setMovies(response.data.results);
+        const response = await axios.get('http://localhost:8000/movies');
+        setMovies(response.data);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
@@ -30,9 +18,15 @@ const Movie = () => {
     fetchMovies();
   }, []);
 
+  const handleMovieClick = (selectedMovie) => {
+    // Add logic to navigate to the selected movie's page
+    console.log('Navigating to:', selectedMovie.title);
+  };
+
   return (
     <div>
       <h1>Popular Movies</h1>
+      <MovieSearch allMovies={movies} onMovieClick={handleMovieClick} />
       <div>
         {movies.map((movie) => (
           <div key={movie.id}>
