@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MovieSearch = ({ allMovies, onMovieClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,11 +23,13 @@ const MovieSearch = ({ allMovies, onMovieClick }) => {
       <ul>
         {searchQuery &&
           filteredMovies.map((movie) => (
-            <li key={movie.id} onClick={() => onMovieClick(movie)}>
-              {movie.title.substring(0, searchQuery.length)}
-              <span style={{ fontWeight: 'bold' }}>
-                {movie.title.substring(searchQuery.length)}
-              </span>
+            <li key={movie.id}>
+              <Link to={`/movies/${movie.id}`}>
+                {movie.title.substring(0, searchQuery.length)}
+                <span style={{ fontWeight: 'bold' }}>
+                  {movie.title.substring(searchQuery.length)}
+                </span>
+              </Link>
             </li>
           ))}
       </ul>
