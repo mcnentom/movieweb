@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Home from './components/Home';
 import Trailer from './components/Trailer';
 
+
 const App = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <div>
+    
       {selectedMovie ? (
         <Trailer movieId={selectedMovie} onBack={handleBackToHome} />
       ) : (

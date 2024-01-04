@@ -36,8 +36,8 @@ const Trailer = ({ movieId, onBack }) => {
     <div style={{ textAlign: 'left', padding: '20px' }}>
       {movieDetails ? (
         <>
-          <h2>{`Selected Movie: ${movieDetails.title}`}</h2>
-          <p>{`Vote Average: ${movieDetails.vote_average}`}</p>
+          <h2>{`${movieDetails.title}`}</h2>
+          <p>{`Rating: ${movieDetails.vote_average}`}</p>
           <p>{`Description: ${movieDetails.description}`}</p>
         </>
       ) : (

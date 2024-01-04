@@ -1,0 +1,29 @@
+/* Home.css */
+.movies-list {
+    list-style: none;
+    padding: 0 3rem ;
+  }
+  
+.movie-item {
+    margin: 10px;
+    display: inline-block;
+  }
+  
+.movie-poster {
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+.movie-poster:hover {
+    transform: scale(1.1);
+  }
+.searchBar{
+    position: absolute;
+    top: 2rem;
+    right:7.2rem;
+}
+.searchBar input{
+    width: 120%;
+    height: 20px;
+}

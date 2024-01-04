@@ -1,8 +1,9 @@
-// Home.js
 import React, { useState, useEffect } from 'react';
+import './style.css';
 
 const Home = ({ onMovieClick }) => {
   const [movies, setMovies] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -18,16 +19,34 @@ const Home = ({ onMovieClick }) => {
     fetchMovies();
   }, []);
 
+  const handleSearch = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   return (
     <div>
-      <h1>Home</h1>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {(movies ?? []).map((movie) => (
-          <li key={movie.id} style={{ margin: '10px', display: 'inline-block' }}>
+      <h1>Golango</h1>
+      <p>Watch your favourite movie's trailer</p>
+      <div className='searchBar'>
+        <input
+          type="text"
+          placeholder="Search by movie title"
+          value={searchInput}
+          onChange={handleSearch}
+          
+        />
+      </div>
+      <ul className="movies-list">
+        {(filteredMovies ?? []).map((movie) => (
+          <li key={movie.id} className="movie-item">
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
-              style={{ width: '200px', cursor: 'pointer' }}
+              className="movie-poster"
               onClick={() => onMovieClick(movie.id)}
             />
           </li>
