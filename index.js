@@ -7,21 +7,34 @@ const app = express();
 const PORT = 8000;
 
 app.use(cors());
-
 app.get('/movies', async (req, res) => {
   try {
     const apiKey = process.env.TMDB_API_KEY;
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
-    );
+    const totalPages = 5; // Set the number of pages you want to fetch
 
-    const movies = response.data.results.map((movie) => ({
-      id: movie.id,
-      title: movie.title,
-      vote_average: movie.vote_average,
-      description: movie.overview,
-      poster_path: movie.poster_path,
-    }));
+    // Create an array of page numbers
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    // Initialize an array to store the responses
+    const responses = [];
+
+    // Use a loop to make requests for each page
+    for (const page of pageNumbers) {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`
+      );
+
+      responses.push(response.data.results.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        vote_average: movie.vote_average,
+        description: movie.overview,
+        poster_path: movie.poster_path,
+      })));
+    }
+
+    // Flatten the responses array to a single array of movies
+    const movies = [].concat(...responses);
 
     res.json(movies);
   } catch (error) {

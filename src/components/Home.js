@@ -28,9 +28,9 @@ const Home = ({ onMovieClick }) => {
   );
 
   return (
-    <div>
-      <h1>Golango</h1>
-      <p>Watch your favourite movie's trailer</p>
+    <div className='general'>
+      <h1 style={{margin :'10px 15px ',fontSize:'2.5rem'}}>Golango</h1>
+      <p style={{margin :'30px 15px ',fontSize:'1.5rem'}}>Watch your favourite movie's trailer</p>
       <div className='searchBar'>
         <input
           type="text"
