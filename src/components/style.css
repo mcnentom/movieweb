@@ -40,6 +40,19 @@
     outline: none;
     font-size: 1rem;
 }
+.darkMode{
+  background-color: #0d0707;
+  color: #fff;
+}
+
+.lightMode{
+  background-color: #fff;
+}
+.btn{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
 @media (max-width : 600px){
   .general{
      display: flex;
